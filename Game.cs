@@ -271,6 +271,7 @@ namespace Vidal_DungeonCrawler
 
             WriteLine("You have no idea how long it'll take to raise your level enough to go back to your own universe... It could take more time than your human body can afford. You aren't lost, but aren't found either.\nYou're stuck.\nAt least the figure is nice... Right?");
 
+            ReadKey();
             Clear();
             GameIntro();
         }
