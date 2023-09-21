@@ -1,0 +1,28 @@
+*{
+    text-align: center;
+}
+
+body{
+    background-color: darkblue;
+}
+
+header{
+    background-color: blue;
+}
+
+h1{
+    color: cyan;
+}
+
+h3{
+    color: aliceblue;
+}
+
+p{
+    color:cyan
+}
+
+button{
+    color:aqua;
+    background-color: blue;
+}
