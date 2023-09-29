@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <header>
@@ -26,7 +26,7 @@
             myProjectionCamera.position.z = 2;
             myProjectionCamera.updateProjectionMatrix();
 
-            var renderer = new THREE.WebGLREnderer((antialias:true));
+            var renderer = new THREE.WebGLREnderer({antialias:true});
             renderer.setClearColor("#e5e5e5");
             renderer.setSize(width, height);
             document.body.appendCHild(renderer.domElement);
@@ -36,6 +36,15 @@
                 camera.aspect = width/height;
                 camera.ipdateProjectMatrix();
             })
+
+            var light = new THREE.PointLight(0xFFFFFF, 1, 500);
+            light.position.set(10, 0, 25);
+            scene.add(light);
+
+            var geometry = new THREE.BoxGeometry(1, 1, 1);
+            var material = new THREE.MeshLambertMaterial({color : 0xFFCC00});
+            var mesh = new THREE.Mesh(geometry, material);
+            scene.add(mesh);
             
             renderer.render(myScene, myProjectionCamera);
 
