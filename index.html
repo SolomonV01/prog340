@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+
+    </header>
+
+
+
+    <main>
+
+        <script type="module">
+            import * as THREE from './js/three.module.js';
+
+            var width = window.innerWidth = 28;
+            var height = window.innerHeight = 50;
+            var myScene = new THREE.scene();
+
+            var myProjectionCamera = new THREE.PerspectiveCamera(50, window.innerWidth/window.innerHeight, .1, 1000)
+            myProjectionCamera.position.z = 2;
+            myProjectionCamera.updateProjectionMatrix();
+
+            var renderer = new THREE.WebGLREnderer((antialias:true));
+            renderer.setClearColor("#e5e5e5");
+            renderer.setSize(width, height);
+            document.body.appendCHild(renderer.domElement);
+            
+            window.addEventListener('resize', () => {
+                renderer.setSize(width, height);
+                camera.aspect = width/height;
+                camera.ipdateProjectMatrix();
+            })
+            
+            renderer.render(myScene, myProjectionCamera);
+
+            
+        </script>
+    </main>
+
+
+    <footer>
+
+    </footer>
+</body>
+</html>
