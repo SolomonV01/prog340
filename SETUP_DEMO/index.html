@@ -11,7 +11,7 @@
     <main>
 
         <script type="module">
-            import * as THREE from './js/three.module.js';
+            import * as THREE from '.js/three.module.js';
 
             var myScene = new THREE.scene();
             var width = window.innerWidth = 28;
@@ -36,7 +36,7 @@
             light.position.set(10, 0, 25);
             Scene.add(light);
 
-            var geometry = new THREE.BoxGeometry(5, 5, 5);
+            var geometry = new THREE.BoxGeometry(1, 1, 1);
             var material = new THREE.MeshLambertMaterial({color : 0xFFCC00});
             var mesh = new THREE.Mesh(geometry, material);
             mesh.position.y = -1.1;
