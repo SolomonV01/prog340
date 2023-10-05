@@ -14,21 +14,21 @@
             import * as THREE from '.js/three.module.js';
 
             var scene = new THREE.scene();
-            window.innerWidth = 28;
-            window.innerHeight = 50;
+            var width = window.innerWidth = 28;
+            var height = window.innerHeight = 50;
 
-            var myProjectionCamera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, .1, 1000)
+            var myProjectionCamera = new THREE.PerspectiveCamera(75, width/height, .1, 1000);
             myProjectionCamera.position.z = 2;
             myProjectionCamera.updateProjectionMatrix();
 
             var renderer = new THREE.WebGLRenderer({antialias:true});
             renderer.setClearColor("#e5e5e5");
-            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setSize(width, height);
             document.body.appendChild(renderer.domElement);
             
             window.addEventListener('resize', () => {
-                renderer.setSize(window.innerWidth, window.innerHeight);
-                camera.aspect = window.innerWidth/window.innerHeight;
+                renderer.setSize(width, height);
+                camera.aspect = width/height;
                 camera.updateProjectMatrix();
             })
 
@@ -36,18 +36,26 @@
             light.position.set(10, 0, 25);
             scene.add(light);
 
+            //Box
             var geometry = new THREE.BoxGeometry(2, 2, 2);
             var material = new THREE.MeshLambertMaterial({color : 0xFFCC00});
             var mesh = new THREE.Mesh(geometry, material);
             mesh.position.y = 1.1;
+            mesh.position.x = 1.1;
             scene.add(mesh);
             
             var geometry2 = new THREE.BoxGeometry(1, 3, 1);
-            var material2 = new THREE.MeshLambertMaterial({color : 0xFFAA00})
+            var material2 = new THREE.MeshLambertMaterial({color : 0xFFAA00});
             var mesh2 = new THREE.Mesh(geometry2, material2);
             mesh2.position.y = 1.5;
+            mesh2.position.x = 1.5;
 
-
+            //Cone
+            var geometry3 = new THREE.ConeGeometry(6, 8, 16);
+            var material3 = new THREE.MeshLambertMaterial({color : 0xFFCC00});
+            var mesh3 = new THREE.Mesh(geometry3, material3);
+            mesh3.position.y = 1.9;
+            mesh3.position.x = 1.9;
 
             renderer.render(scene, myProjectionCamera);
         </script>
