@@ -17,13 +17,15 @@
         <script type="module">
             import * as THREE from 'js/three.module.js';
 
-            var scene = new THREE.scene();
+            var scene = new THREE.Scene();
             var width = window.innerWidth = 28;
             var height = window.innerHeight = 50;
 
             var myProjectionCamera = new THREE.PerspectiveCamera(75, width/height, .1, 1000);
             myProjectionCamera.position.z = 2;
             myProjectionCamera.updateProjectionMatrix();
+            camera.position.z = 100;
+            scene.add(myProjectionCamera);
 
             var renderer = new THREE.WebGLRenderer({antialias:true});
             renderer.setClearColor("#e5e5e5");
@@ -58,6 +60,7 @@
             var mesh3 = new THREE.Mesh(geometry3, material3);
             mesh3.position.y = 1.9;
             mesh3.position.x = 1.9;
+            scene.add(mesh3);
 
             //Cylinder
             var cRadiusTop = 4;  
@@ -70,13 +73,15 @@
             var mesh4 = new THREE.Mesh(geometry4, material4);
             mesh3.position.y = 2.3;
             mesh3.position.x = 2.3;
+            scene.add(mesh4);
 
             //Sphere
-            var geometry5 = new THREE.SphereGeometry(2, 2, 2);
+            var geometry5 = new THREE.SphereGeometry(10);
             var material5 = new THREE.MeshLambertMaterial({color : 0xFFCC00});
             var mesh5 = new THREE.Mesh(geometry5, material5);
             mesh3.position.y = 2.7;
             mesh3.position.x = 2.7;
+            scene.add(mesh5);
 
             //Diamond
             var geometry6 = new THREE.DiamondGeometry(3, 3, 3);
@@ -84,6 +89,7 @@
             var mesh6 = new THREE.Mesh(geometry6, material6);
             mesh3.position.y = 3.1;
             mesh3.position.x = 3.1;
+            mesh.ad(mesh6);
 
             var render = function()
             {
