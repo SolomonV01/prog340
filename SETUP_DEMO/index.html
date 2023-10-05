@@ -51,11 +51,23 @@
             mesh2.position.x = 1.5;
 
             //Cone
-            var geometry3 = new THREE.ConeGeometry(6, 8, 16);
+            var coneRadius = 6;  
+            var coneHeight = 8;  
+            var coneRadialSegments = 16;
+
+            var geometry3 = new THREE.ConeGeometry(coneRadius, coneHeight, coneRadialSegments);
             var material3 = new THREE.MeshLambertMaterial({color : 0xFFCC00});
             var mesh3 = new THREE.Mesh(geometry3, material3);
             mesh3.position.y = 1.9;
             mesh3.position.x = 1.9;
+
+            //CylinderGeometry
+            var radiusTop = 4;  
+            var radiusBottom = 4;  
+            var cHeight = 8;  
+            var radialSegments = 12;
+
+            var geometry4 = new THREE.CylinderGeometry(radiusTop. radiusBottom. cHeight, radialSegments);
 
             renderer.render(scene, myProjectionCamera);
         </script>
