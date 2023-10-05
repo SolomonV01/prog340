@@ -14,8 +14,8 @@
             import * as THREE from '.js/three.module.js';
 
             var scene = new THREE.scene();
-            var width = window.innerWidth = 28;
-            var height = window.innerHeight = 50;
+            window.innerWidth = 28;
+            window.innerHeight = 50;
 
 
             var myProjectionCamera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, .1, 1000)
@@ -24,7 +24,7 @@
 
             var renderer = new THREE.WebGLRenderer({antialias:true});
             renderer.setClearColor("#e5e5e5");
-            renderer.setSize(width, height);
+            renderer.setSize(window.innerWidth, window.innerHeight);
             document.body.appendChild(renderer.domElement);
             
             window.addEventListener('resize', () => {
