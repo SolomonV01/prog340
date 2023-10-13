@@ -1,0 +1,26 @@
+{
+  "dependencies": {
+    "dat.gui": "^0.7.9",
+    "g": "^2.0.1",
+    "parcel": "^2.10.0",
+    "three": "^0.157.0"
+  },
+  "name": "prog340",
+  "description": "",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SolomonV01/prog340.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SolomonV01/prog340/issues"
+  },
+  "homepage": "https://github.com/SolomonV01/prog340#readme"
+}

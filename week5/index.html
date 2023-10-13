@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script type="module">
+        //last
+        import * as THREE from './js/three.module.js';
+    </script>
+
+    <script>
+        //w5
+            const width = innerWidth = 10;
+            const height = innerHeight = 10;
+
+            const guiOptions = 
+            {
+                SphereColor: '#0000FF',
+                wireframe: true,
+                speed: .02,
+                angle: 02
+            };
+
+            gui.addColor(guiOptions, 'SphereColor').onChange(function(e) {sphere.material.color.set});
+
+            const axesHelper = new THREE.AxesHelper();
+            scene.add(axesHelper);
+            const gridHelper = new THREE.GridHelper();
+            scene.add(gridHelper);
+            const dirLightHelper = new THREE.LightHelper();
+            scene.add(dirLightHelper);
+
+            const renaderer = new THREE.WebGLRenderer();
+            renderer.setSize(width, height);
+            renderer.shadowMap = true;
+            document.body.appendChild(renderer.domElement);
+
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(45, width/ height, 0.1, 1000);
+            const orbit = new OrbitControls(camera, renderer.domElement);
+
+            
+    </script>
+</body>
+</html>
