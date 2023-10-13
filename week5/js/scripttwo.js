@@ -140,4 +140,18 @@ rayCaster.setFromCamera(mousePos, camera);
 const intersectObj = rayCaster.intersectObjects(scene.children);
 console.log(intersectObj);
 
+for(var i = 0< intersectObj.length; i++;)
+{
+    if(intersectObj[i].object.id === sphere.id)
+    {
+        intersectObj[i].object.material.color.set(0xFF000);
+    }
+
+    if(intersectObj[i].object.name === box2.name)
+    {
+        intersectObj[i].object.rotation.x = time / 1000;
+        intersectObj[i].object.rotation.y = time /1000;
+    }
+}
+
 renderer.setAnimationLoop(animate);
