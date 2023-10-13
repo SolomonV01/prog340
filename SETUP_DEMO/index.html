@@ -6,20 +6,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Three JS Class Demo</title>
     <link rel="stylesheet" href="css/main.css">
+
 </head>
 <body>
     <main>
-
+        <header>
+            <h1>Gabrielle Vidal</h1>
+            <h2>Credits:</h2>
+            <p>ThreeJs.Org</p>
+        </header>
         <script type="module">
             import * as THREE from './js/three.module.js';
-            
             var width = window.innerWidth - 28;
             var height = window.innerHeight - 50;
             var myScene = new THREE.Scene();
+            import * as THREE from 'js/three.module.js';
+        </script>
+        <script>
+            var scene = new THREE.Scene();
+            var width = window.innerWidth = 28;
+            var height = window.innerHeight = 50;
 
-            var myProjectionCamera = new THREE.PerspectiveCamera(50, window.innerWidth/window.innerHeight, .1, 1000)
+
+            var myProjectionCamera = new THREE.PerspectiveCamera(75, width/height, .1, 1000);
             myProjectionCamera.position.z = 2;
             myProjectionCamera.updateProjectionMatrix();
+            camera.position.z = 100;
+            scene.add(myProjectionCamera);
 
             var renderer = new THREE.WebGLRenderer({antialias:true});
             renderer.setClearColor("#e5e5e5");
@@ -34,9 +47,10 @@
 
             var light = new THREE.PointLight(0xFFFFFF, 1, 500);
             light.position.set(10, 0, 25);
-            myScene.add(light);
+            scene.add(light);
 
-            var geometry = new THREE.BoxGeometry(1, 1, 1);
+            //Box
+            var geometry = new THREE.BoxGeometry(2, 2, 2);
             var material = new THREE.MeshLambertMaterial({color : 0xFFCC00});
             var mesh = new THREE.Mesh(geometry, material);
             mesh.position.y = -1.1;
@@ -48,6 +62,62 @@
             //mesh2.position.y = 1.5;
 
             renderer.render(myScene, myProjectionCamera);
+            mesh.position.y = 1.1;
+            mesh.position.x = 1.1;
+            scene.add(mesh);
+
+            //Cone
+            var coneRadius = 6;  
+            var coneHeight = 8;  
+            var coneRadialSegments = 16;
+
+            var geometry3 = new THREE.ConeGeometry(coneRadius, coneHeight, coneRadialSegments);
+            var material3 = new THREE.MeshLambertMaterial({color : 0xFFCC00});
+            var mesh3 = new THREE.Mesh(geometry3, material3);
+            mesh3.position.y = 1.9;
+            mesh3.position.x = 1.9;
+            scene.add(mesh3);
+
+            //Cylinder
+            var cRadiusTop = 4;  
+            var cRadiusBottom = 4;  
+            var cHeight = 8;  
+            var cRadialSegments = 12;
+
+            var geometry4 = new THREE.CylinderGeometry(cRadiusTop. cRadiusBottom. cHeight, cRadialSegments);
+            var material4 = new THREE.MeshLambertMaterial({color : 0xFFCC00});
+            var mesh4 = new THREE.Mesh(geometry4, material4);
+            mesh3.position.y = 2.3;
+            mesh3.position.x = 2.3;
+            scene.add(mesh4);
+
+            //Sphere
+            var geometry5 = new THREE.SphereGeometry(10);
+            var material5 = new THREE.MeshLambertMaterial({color : 0xFFCC00});
+            var mesh5 = new THREE.Mesh(geometry5, material5);
+            mesh3.position.y = 2.7;
+            mesh3.position.x = 2.7;
+            scene.add(mesh5);
+
+            //Diamond
+            var geometry6 = new THREE.DiamondGeometry(3, 3, 3);
+            var material6 = new THREE.MeshLambertMaterial({color : 0xFFCC00});
+            var mesh6 = new THREE.Mesh(geometry6, material6);
+            mesh3.position.y = 3.1;
+            mesh3.position.x = 3.1;
+            mesh.add(mesh6);
+
+            var render = function()
+            {
+                requestAnimationFrame(render);
+                mesh.rotation.x += 0.01;
+                mesh.rotation.y += 0.01;
+                renderer.render(scene, camera);
+            }
+
+            render();
+
+            renderer.render(scene, myProjectionCamera);
         </script>
     </main>
 </body>
