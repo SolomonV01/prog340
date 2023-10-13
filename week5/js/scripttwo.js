@@ -4,6 +4,13 @@ import * as dat from 'dat.gui';
 import background from '../img/background.jpg'; // Credit: <a href="https://www.freepik.com/free-photo/abstract-flowing-neon-wave-background_15474089.htm#query=background&position=26&from_view=keyword">Image by rawpixel.com</a> on Freepik
 import stars from '../img/stars.jpg'; //https://www.pxfuel.com/en/free-photo-obmtg/download
 
+import oneDice from '../img/one.jpg';
+import twoDice from '../img/two.JPG';
+import threeDice from '../img/three.JPG';
+import fourDice from '../img/four.JPG';
+import fiveDice from '../img/five.JPG';
+import sixDice from '../img/six.JPG';
+import { TextureLoader } from "../../SETUP_DEMO/js/three";
 
 var height = window.innerHeight;
 var width = window.innerWidth;
@@ -35,7 +42,12 @@ orbit.update();
 const boxGeo = new THREE.BoxGeometry();
 const boxMat = new THREE.MeshBasicMaterial({ color: 0x00FF00 });
 const box = new THREE.Mesh(boxGeo, boxMat);
-scene.add(box);
+//scene.add(box);
+
+const box2Geo = new THREE.BoxGeometry(4, 4, 4);
+const box2Mat = new THREE.MeshBasicMaterial({color: 0xFF0000, map: TextureLoader.load(stars)})
+const box2 = new THREE.Mesh(box2Geo, box2Mat);
+
 //Floor
 const planeGeo = new THREE.PlaneGeometry(30, 30)
 const planeMat = new THREE.MeshStandardMaterial({ color: 0xFFFFFF, side: THREE.DoubleSide });
@@ -107,5 +119,25 @@ function animate(time) {
     renderer.render(scene, camera);
 }
 
+const box2Materials = [
+    new THREE.MeshStandardMaterial({map : textureLoader.Load(oneDice)}),
+    new THREE.MeshBasicMaterial({map : textureLoader.Load(twoDice)}),
+    new THREE.MeshBasicMaterial({map : textureLoader.Load(threeDice)}),
+    new THREE.MeshBasicMaterial({map : textureLoader.Load(fourDice)}),
+    new THREE.MeshBasicMaterial({map : textureLoader.Load(fiveDice)}),
+    new THREE.MeshStandardMaterial({map : textureLoader.Load(sixDice)})
+];
+
+const mousePos = new THREE.Vector2();
+
+window.addEventListener("mousemove", function(e){
+    mousePos.x = (e.clientX / width) * 2 - 1;
+    mousePos.y = (e.clientY / height) * 2 + 1;
+});
+
+const rayCaster = new THREE.Raycaster();
+rayCaster.setFromCamera(mousePos, camera);
+const intersectObj = rayCaster.intersectObjects(scene.children);
+console.log(intersectObj);
 
 renderer.setAnimationLoop(animate);

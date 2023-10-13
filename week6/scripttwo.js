@@ -3,7 +3,9 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import * as dat from 'dat.gui';
 import background from '../img/background.jpg'; // Credit: <a href="https://www.freepik.com/free-photo/abstract-flowing-neon-wave-background_15474089.htm#query=background&position=26&from_view=keyword">Image by rawpixel.com</a> on Freepik
 import stars from '../img/stars.jpg'; //https://www.pxfuel.com/en/free-photo-obmtg/download
+import { Texture, TextureLoader } from "../SETUP_DEMO/js/three";
 
+import oneDice from '../img/six.jpg'
 
 var height = window.innerHeight;
 var width = window.innerWidth;
@@ -12,8 +14,6 @@ const renderer = new THREE.WebGLRenderer();
 renderer.shadowMap.enabled = true;
 renderer.setSize(width, height);
 document.body.appendChild(renderer.domElement);
-
-
 
 const scene = new THREE.Scene();
 //renderer.setClearColor(0x334455);
@@ -37,7 +37,12 @@ orbit.update();
 const boxGeo = new THREE.BoxGeometry();
 const boxMat = new THREE.MeshBasicMaterial({ color: 0x00FF00 });
 const box = new THREE.Mesh(boxGeo, boxMat);
-scene.add(box);
+//scene.add(box);
+
+const box2Geo = new THREE.BoxGeometry(4, 4, 4);
+const box2Mat = new THREE.MeshBasicMaterial({color: 0xFF0000, map: TextureLoader.load(stars)})
+const box2 = new THREE.Mesh(box2Geo, box2Mat);
+
 //Floor
 const planeGeo = new THREE.PlaneGeometry(30, 30)
 const planeMat = new THREE.MeshStandardMaterial({ color: 0xFFFFFF, side: THREE.DoubleSide });
