@@ -12,8 +12,8 @@ import fiveDice from '../img/five.JPG';
 import sixDice from '../img/six.JPG';
 import { TextureLoader } from "../../SETUP_DEMO/js/three";
 
-var height = window.innerHeight;
-var width = window.innerWidth;
+const height = window.innerHeight;
+const width = window.innerWidth;
 
 const renderer = new THREE.WebGLRenderer();
 renderer.shadowMap.enabled = true;
@@ -29,32 +29,36 @@ const cubeLoader = new THREE.CubeTextureLoader();
 scene.background = cubeLoader.load([background,stars,stars,stars,stars,stars]);
 
 const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
-const orbit = new OrbitControls(camera, renderer.domElement);
+camera.position.set(-10, 30, 30);
 
 const axesHelper = new THREE.AxesHelper(5);
 scene.add(axesHelper);
+
 const gridHelper = new THREE.GridHelper(30);
 scene.add(gridHelper);
 
 camera.position.set(-10, 30, 30);
 orbit.update();
+
 //green box
 const boxGeo = new THREE.BoxGeometry();
 const boxMat = new THREE.MeshBasicMaterial({ color: 0x00FF00 });
 const box = new THREE.Mesh(boxGeo, boxMat);
-//scene.add(box);
+scene.add(box);
 
 const box2Geo = new THREE.BoxGeometry(4, 4, 4);
 const box2Mat = new THREE.MeshBasicMaterial({color: 0xFF0000, map: TextureLoader.load(stars)})
 const box2 = new THREE.Mesh(box2Geo, box2Mat);
+scene.add(box2);
 
 //Floor
 const planeGeo = new THREE.PlaneGeometry(30, 30)
 const planeMat = new THREE.MeshStandardMaterial({ color: 0xFFFFFF, side: THREE.DoubleSide });
 const plane = new THREE.Mesh(planeGeo, planeMat);
 scene.add(plane);
-plane.rotation.x = -.5 * Math.PI;
+plane.rotation.x = -Math.PI/2;
 plane.receiveShadow = true;
+
 //Sphere
 const sphereGeo = new THREE.SphereGeometry(4, 40, 40);
 const sphereMat = new THREE.MeshStandardMaterial({ color: 0x0000FF, wireframe: false });
@@ -62,9 +66,11 @@ const sphere = new THREE.Mesh(sphereGeo, sphereMat);
 scene.add(sphere);
 sphere.position.set(-10, 10, 0);
 sphere.castShadow = true;
+
 //Ambient
 const ambientLight = new THREE.AmbientLight(0x333333);
 scene.add(ambientLight);
+
 //Spot
 const spotLight = new THREE.SpotLight(0xFFFFFF);
 scene.add(spotLight);
@@ -81,28 +87,28 @@ scene.add(spotLightHelper);
 
 const gui = new dat.GUI();
 const guiOptions = {
-    SphereColor: '#0000FF',
+    SphereColor: 0X0000FF,
     wireframe: false,
     speed : 0.01,
     angle: 0.2,
     penumbra: 0,
     intensity : 1
 };
-gui.addColor(guiOptions, 'SphereColor').onChange(function (e) {
-    sphere.material.color.set(e);
+
+gui.addColor(guiOptions, 'SphereColor').onChange(function (color) {
+    sphere.material.color.set(color);
 });
 
-gui.add(guiOptions, 'wireframe').onChange(function (e) {
-    sphere.material.wireframe = e;
+gui.add(guiOptions, 'wireframe').onChange(function (wireframe) {
+    sphere.material.wireframe = wireframe;
 });
 
 gui.add(guiOptions, 'speed', 0,.1);
-
 gui.add(guiOptions, 'angle', 0, 1);
 gui.add(guiOptions, 'penumbra', 0, 1);
 gui.add(guiOptions, 'intensity', 0, 1);
 
-var bounceAngle = 0;
+const bounceAngle = 0;
 
 function animate(time) {
     box.rotation.x = time / 1000;

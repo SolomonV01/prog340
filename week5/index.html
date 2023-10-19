@@ -9,40 +9,95 @@
     <script type="module">
         //last
         import * as THREE from './js/three.module.js';
-    </script>
-
-    <script>
         //w5
-            const width = innerWidth = 10;
-            const height = innerHeight = 10;
+        const width = innerWidth = 10;
+        const height = innerHeight = 10;
 
-            const guiOptions = 
-            {
-                SphereColor: '#0000FF',
-                wireframe: true,
-                speed: .02,
-                angle: 02
-            };
+        const guiOptions = 
+        {
+            SphereColor: '#0000FF',
+            wireframe: true,
+            speed: .02,
+            angle: 02
+        };
 
-            gui.addColor(guiOptions, 'SphereColor').onChange(function(e) {sphere.material.color.set});
+        gui.addColor(guiOptions, 'SphereColor').onChange(function(e) {sphere.material.color.set});
 
-            const axesHelper = new THREE.AxesHelper();
-            scene.add(axesHelper);
-            const gridHelper = new THREE.GridHelper();
-            scene.add(gridHelper);
-            const dirLightHelper = new THREE.LightHelper();
-            scene.add(dirLightHelper);
+        const axesHelper = new THREE.AxesHelper();
+        scene.add(axesHelper);
+        const gridHelper = new THREE.GridHelper();
+        scene.add(gridHelper);
+        const dirLightHelper = new THREE.LightHelper();
+        scene.add(dirLightHelper);
 
-            const renaderer = new THREE.WebGLRenderer();
-            renderer.setSize(width, height);
-            renderer.shadowMap = true;
-            document.body.appendChild(renderer.domElement);
+        const renaderer = new THREE.WebGLRenderer();
+        renderer.setSize(width, height);
+        renderer.shadowMap = true;
+        document.body.appendChild(renderer.domElement);
 
-            const scene = new THREE.Scene();
-            const camera = new THREE.PerspectiveCamera(45, width/ height, 0.1, 1000);
-            const orbit = new OrbitControls(camera, renderer.domElement);
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(45, width/ height, 0.1, 1000);
+        const orbit = new OrbitControls(camera, renderer.domElement);
 
-            
+        // Set up the scene
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.z = 5;
+
+        const renderer = new THREE.WebGLRenderer();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        // Add a rotating geometry
+        const rotatingGeometry = new THREE.TorusKnotGeometry(1, 0.4, 100, 16);
+        const rotatingMaterial = new THREE.MeshPhongMaterial({ color: 0x00ff00 });
+        const rotatingObject = new THREE.Mesh(rotatingGeometry, rotatingMaterial);
+        rotatingObject.castShadow = true;
+        scene.add(rotatingObject);
+
+        // Add a moving geometry
+        const movingGeometry = new THREE.ConeGeometry(1, 2, 32);
+        const movingMaterial = new THREE.MeshPhongMaterial({ color: 0xff0000 });
+        const movingObject = new THREE.Mesh(movingGeometry, movingMaterial);
+        movingObject.castShadow = true;
+        scene.add(movingObject);
+
+        // Add lights
+        const ambientLight = new THREE.AmbientLight(0x404040);
+        scene.add(ambientLight);
+
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+        directionalLight.position.set(1, 1, 1);
+        directionalLight.castShadow = true;
+        scene.add(directionalLight);
+
+        // Add a plane
+        const planeGeometry = new THREE.PlaneGeometry(10, 10);
+        const planeMaterial = new THREE.MeshPhongMaterial({ color: 0xaaaaaa, side: THREE.DoubleSide });
+        const plane = new THREE.Mesh(planeGeometry, planeMaterial);
+        plane.receiveShadow = true;
+        scene.add(plane);
+
+        // Add UI controls (using dat.GUI for simplicity)
+        const gui = new dat.GUI();
+        const rotationControl = gui.add(rotatingObject.rotation, "y", 0, Math.PI * 2).name("Rotate Object");
+        const positionControl = gui.add(movingObject.position, "z", -5, 5).name("Move Object");
+
+        // Set up mouse interaction for scene rotation
+        const controls = new THREE.OrbitControls(camera, renderer.domElement);
+
+        // Render the scene
+        const animate = () => {
+            requestAnimationFrame(animate);
+
+            // Rotate the rotating object
+            rotatingObject.rotation.x += 0.01;
+            rotatingObject.rotation.y += 0.01;
+
+            renderer.render(scene, camera);
+        };
+
+        animate()
     </script>
 </body>
 </html>
